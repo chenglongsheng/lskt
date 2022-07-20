@@ -27,6 +27,11 @@
             <artifactId>model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>person.cls</groupId>
+            <artifactId>service_utils</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!--web 需要启动项目-->
         <dependency>

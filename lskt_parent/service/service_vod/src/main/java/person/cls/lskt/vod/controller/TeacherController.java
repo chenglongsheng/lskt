@@ -2,10 +2,8 @@ package person.cls.lskt.vod.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import person.cls.lskt.model.vod.Teacher;
 import person.cls.lskt.vod.service.TeacherService;
 
@@ -29,6 +27,11 @@ public class TeacherController {
     @GetMapping("getAll")
     public List<Teacher> getAllTeacher() {
         return teacherService.list();
+    }
+
+    @DeleteMapping("remove/{id}")
+    public boolean removeById(@PathVariable String id) {
+        return teacherService.removeById(id);
     }
 
 }
