@@ -1,4 +1,4 @@
-package person.cls.lskt.utils.config;
+package person.cls.lskt.utils.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
