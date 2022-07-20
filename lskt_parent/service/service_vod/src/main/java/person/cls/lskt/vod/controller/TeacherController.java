@@ -38,7 +38,7 @@ public class TeacherController {
 
     @ApiOperation("逻辑删除讲师")
     @DeleteMapping("remove/{id}")
-    public Result<Boolean> removeById(@PathVariable Long id) {
+    public Result<Teacher> removeById(@PathVariable Long id) {
         boolean isDeleted = teacherService.removeById(id);
         if (isDeleted) {
             return Result.ok(null);
@@ -51,6 +51,32 @@ public class TeacherController {
     @PostMapping("page/{current}/{limit}")
     public Result<IPage<Teacher>> pageTeacher(@PathVariable Long current, @PathVariable Long limit, @RequestBody(required = false) TeacherQueryVo teacherQueryVo) {
         return teacherService.pageTeacher(current, limit, teacherQueryVo);
+    }
+
+    @ApiOperation(value = "新增")
+    @PostMapping("save")
+    public Result<Teacher> save(@RequestBody Teacher teacher) {
+        teacherService.save(teacher);
+        return Result.ok(null);
+    }
+
+    @ApiOperation(value = "获取")
+    @GetMapping("get/{id}")
+    public Result<Teacher> getById(@PathVariable Long id) {
+        Teacher teacher = teacherService.getById(id);
+        return Result.ok(teacher);
+    }
+
+    @PostMapping("update")
+    public Result<Teacher> update(@RequestBody Teacher teacher) {
+        teacherService.updateById(teacher);
+        return Result.ok(null);
+    }
+
+    @DeleteMapping("batchRemove")
+    public Result<Teacher> del(@RequestBody List<Long> ids) {
+        teacherService.removeByIds(ids);
+        return Result.ok(null);
     }
 
 }
