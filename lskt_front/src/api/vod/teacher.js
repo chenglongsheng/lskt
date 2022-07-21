@@ -26,5 +26,12 @@ export default {
             url: `/vod/teacher/get/${id}`,
             method: `get`
         })
+    },
+    update(teacher) {
+        return request({
+            url: `/vod/teacher/update`,
+            method: `post`,
+            data: teacher
+        })
     }
 }

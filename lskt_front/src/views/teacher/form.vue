@@ -1,11 +1,11 @@
 <template>
   <div class="app-container">
     <!-- 输入表单 -->
-    <el-form label-width="120px">
-      <el-form-item label="讲师名称">
+    <el-form :model="teacher" label-width="120px" :rules="rules" ref="teacher">
+      <el-form-item label="讲师名称" prop="name">
         <el-input v-model="teacher.name" />
       </el-form-item>
-      <el-form-item label="入驻时间">
+      <el-form-item label="入驻时间" prop="joinDate">
         <el-date-picker v-model="teacher.joinDate" value-format="yyyy-MM-dd" />
       </el-form-item>
       <el-form-item label="讲师排序">
@@ -21,10 +21,10 @@
           <el-option :value="2" label="首席讲师" />
         </el-select>
       </el-form-item>
-      <el-form-item label="讲师简介">
+      <el-form-item label="讲师简介" prop="intro">
         <el-input v-model="teacher.intro" />
       </el-form-item>
-      <el-form-item label="讲师资历">
+      <el-form-item label="讲师资历" prop="career">
         <el-input v-model="teacher.career" :rows="10" type="textarea" />
       </el-form-item>
 
@@ -32,7 +32,7 @@
       <el-form-item label="讲师头像"></el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="saveOrUpdate()">保存</el-button>
+        <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate('teacher')">保存</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -52,7 +52,25 @@ export default {
         intro: '',
         career: ''
       },
-      saveBtnDisabled: false // 保存按钮是否禁用，防止表单重复提交
+      saveBtnDisabled: false, // 保存按钮是否禁用，防止表单重复提交
+      rules: {
+        name: [
+          { required: true, message: '请输入讲师名称', trigger: 'change' }
+        ],
+        joinDate: [
+          {
+            required: true,
+            message: '请输入入驻时间',
+            trigger: 'change'
+          }
+        ],
+        intro: [
+          { required: true, message: '请输入讲师简介', trigger: 'change' }
+        ],
+        career: [
+          { required: true, message: '请输入讲师资历', trigger: 'change' }
+        ]
+      }
     }
   },
   created() {
@@ -61,21 +79,41 @@ export default {
     }
   },
   methods: {
-    saveOrUpdate() {
-      console.log(this.teacher)
-      this.saveData()
+    saveOrUpdate(formName) {
+      //   this.saveBtnDisabled = true
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          if (this.teacher.id) {
+            this.updateData()
+          } else {
+            this.saveData()
+          }
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     },
     saveData() {
       teacherApi.save(this.teacher).then(response => {
         this.$message({
           type: 'success',
-          message: response.message
+          message: '添加成功！'
         })
         // 导航到列表页面
         this.$router.push({ path: '/vod/teacher/list' })
       })
     },
-    updateData() {},
+    updateData() {
+      teacherApi.update(this.teacher).then(response => {
+        this.$message({
+          type: 'success',
+          message: '更新成功！'
+        })
+        // 导航到列表页面
+        this.$router.push({ path: '/vod/teacher/list' })
+      })
+    },
     fetchDataById(id) {
       teacherApi.get(id).then(response => {
         this.teacher = response.data
