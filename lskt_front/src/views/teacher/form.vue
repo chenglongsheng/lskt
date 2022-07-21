@@ -55,7 +55,11 @@ export default {
       saveBtnDisabled: false // 保存按钮是否禁用，防止表单重复提交
     }
   },
-  created() {},
+  created() {
+    if (this.$route.params.id) {
+      this.fetchDataById(this.$route.params.id)
+    }
+  },
   methods: {
     saveOrUpdate() {
       console.log(this.teacher)
@@ -71,7 +75,12 @@ export default {
         this.$router.push({ path: '/vod/teacher/list' })
       })
     },
-    updateData() {}
+    updateData() {},
+    fetchDataById(id) {
+      teacherApi.get(id).then(response => {
+        this.teacher = response.data
+      })
+    }
   }
 }
 </script>

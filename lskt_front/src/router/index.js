@@ -67,19 +67,20 @@ export const constantRoutes = [
         path: 'teacher/list',
         name: 'TeacherList',
         component: () => import('@/views/teacher/list'),
-        meta: { title: '讲师列表'}
+        meta: { title: '讲师列表' }
       },
       {
         path: 'teacher/add',
         name: 'TeacherAdd',
         component: () => import('@/views/teacher/form'),
-        meta: { title: '添加讲师'},
+        meta: { title: '添加讲师' },
       },
       {
         path: 'teacher/edit/:id',
         name: 'TeacherEdit',
         component: () => import('@/views/teacher/form'),
-        meta: { title: '编辑讲师'},
+        meta: { title: '编辑讲师' },
+        hidden: true
       }
     ]
   },

@@ -20,5 +20,11 @@ export default {
             method: `post`,
             data: teacher
         })
+    },
+    get(id) {
+        return request({
+            url: `/vod/teacher/get/${id}`,
+            method: `get`
+        })
     }
 }
