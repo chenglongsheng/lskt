@@ -13,5 +13,12 @@ export default {
             url: `/vod/teacher/remove/${id}`,
             method: `delete`
         })
+    },
+    save(teacher) {
+        return request({
+            url: `/vod/teacher/save`,
+            method: `post`,
+            data: teacher
+        })
     }
 }
