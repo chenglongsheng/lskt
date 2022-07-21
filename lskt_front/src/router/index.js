@@ -42,7 +42,7 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
-
+  // 首页
   {
     path: '/',
     component: Layout,
@@ -51,28 +51,35 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '龙生课堂后台管理系统', icon: 'dashboard' }
     }]
   },
-
+  // 讲师管理
   {
-    path: '/example',
+    path: '/vod',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    redirect: '/vod/course/list',
+    name: 'Course',
+    meta: { title: '点播服务', icon: 'el-icon-bank-card' },
+    alwaysShow: true,
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'teacher/list',
+        name: 'TeacherList',
+        component: () => import('@/views/teacher/list'),
+        meta: { title: '讲师列表'}
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: 'teacher/add',
+        name: 'TeacherAdd',
+        component: () => import('@/views/teacher/form'),
+        meta: { title: '添加讲师'},
+      },
+      {
+        path: 'teacher/edit/:id',
+        name: 'TeacherEdit',
+        component: () => import('@/views/teacher/form'),
+        meta: { title: '编辑讲师'},
       }
     ]
   },
@@ -145,17 +152,6 @@ export const constantRoutes = [
         component: () => import('@/views/nested/menu2/index'),
         name: 'Menu2',
         meta: { title: 'menu2' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
       }
     ]
   },
