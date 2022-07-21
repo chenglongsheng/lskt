@@ -33,7 +33,6 @@ public class TeacherController {
     @ApiOperation("查找所有讲师")
     @GetMapping("list")
     public Result<List<Teacher>> listTeacher() {
-        int i = 10 / 0;
         return Result.ok(teacherService.list());
     }
 
