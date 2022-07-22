@@ -33,5 +33,12 @@ export default {
             method: `post`,
             data: teacher
         })
+    },
+    betchRemove(ids) {
+        return request({
+            url: `/vod/teacher/batchRemove`,
+            method: `delete`,
+            data: ids
+        })
     }
 }
