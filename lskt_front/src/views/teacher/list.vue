@@ -174,6 +174,9 @@ export default {
             message: '已取消删除'
           })
         })
+    },
+    add() {
+      this.$router.push({ path: '/vod/teacher/add' })
     }
   }
 }
