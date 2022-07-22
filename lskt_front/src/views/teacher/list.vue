@@ -1,6 +1,12 @@
 <template>
   <div class="app-container">
-    讲师列表
+    <!-- 工具按钮 -->
+    <el-card class="operate-container" shadow="never">
+      <i class="el-icon-tickets" style="margin-top: 5px"></i>
+      <span style="margin-top: 5px">数据列表</span>
+      <el-button class="btn-add" @click="add()" style="margin-left: 10px;">添加</el-button>
+      <el-button class="btn-add" @click="batchRemove()">批量删除</el-button>
+    </el-card>
     <!--查询表单-->
     <el-card class="operate-container" shadow="never">
       <el-form :inline="true" class="demo-form-inline">
@@ -124,6 +130,41 @@ export default {
             message: '删除成功!'
           })
           teacherApi.removeById(id).then(response => {
+            this.fetchData()
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
+    },
+    handleSelectionChange(value) {
+      console.log(value)
+      this.multipleSelection = value
+    },
+    batchRemove() {
+      if (this.multipleSelection.length === 0) {
+        this.$message('请选择要删除的记录！')
+        return
+      }
+      this.$confirm('此操作将删除勾选的讲师, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+          var ids = []
+          this.multipleSelection.forEach(item => {
+            ids.push(item.id)
+          })
+          console.log(ids)
+          teacherApi.betchRemove(ids).then(response => {
             this.fetchData()
           })
         })
