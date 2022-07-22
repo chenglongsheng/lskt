@@ -74,7 +74,7 @@ public class TeacherController {
     }
 
     @DeleteMapping("batchRemove")
-    public Result<Teacher> del(@RequestBody List<Long> ids) {
+    public Result<Teacher> batchRemove(@RequestBody List<Long> ids) {
         teacherService.removeByIds(ids);
         return Result.ok(null);
     }
