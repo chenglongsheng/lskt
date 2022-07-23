@@ -58,27 +58,27 @@ export const constantRoutes = [
   {
     path: '/vod',
     component: Layout,
-    redirect: '/vod/course/list',
+    redirect: '/vod/teacher/list',
     name: 'Course',
-    meta: { title: '点播服务', icon: 'el-icon-bank-card' },
+    meta: { title: '点播服务管理', icon: 'el-icon-bank-card' },
     alwaysShow: true,
     children: [
       {
         path: 'teacher/list',
         name: 'TeacherList',
-        component: () => import('@/views/teacher/list'),
+        component: () => import('@/views/vod/teacher/list'),
         meta: { title: '讲师列表' }
       },
       {
         path: 'teacher/add',
         name: 'TeacherAdd',
-        component: () => import('@/views/teacher/form'),
+        component: () => import('@/views/vod/teacher/form'),
         meta: { title: '添加讲师' },
       },
       {
         path: 'teacher/edit/:id',
         name: 'TeacherEdit',
-        component: () => import('@/views/teacher/form'),
+        component: () => import('@/views/vod/teacher/form'),
         meta: { title: '编辑讲师' },
         hidden: true
       }
@@ -86,14 +86,18 @@ export const constantRoutes = [
   },
 
   {
-    path: '/form',
+    path: '/subject',
     component: Layout,
+    redirect: 'subject/list',
+    name: '课程分类管理',
+    alwaysShow:true,
+    meta: { title: '课程分类管理', icon: 'example' },
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        path: 'list',
+        name: '课程分类列表',
+        component: () => import('@/views/vod/subject/list'),
+        meta: { title: '课程分类列表', icon: 'form' }
       }
     ]
   },
