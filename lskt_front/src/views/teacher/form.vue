@@ -29,7 +29,19 @@
       </el-form-item>
 
       <!-- 讲师头像 -->
-      <el-form-item label="讲师头像"></el-form-item>
+      <el-form-item label="讲师头像">
+        <el-upload
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload"
+          :on-error="handleAvatarError"
+          :action="BASE_API+'/vod/file/upload?module=avatar'"
+          class="avatar-uploader"
+        >
+          <img v-if="teacher.avatar" :src="teacher.avatar" />
+          <i v-else class="el-icon-plus avatar-uploader-icon" />
+        </el-upload>
+      </el-form-item>
 
       <el-form-item>
         <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate('teacher')">保存</el-button>
@@ -52,6 +64,7 @@ export default {
         intro: '',
         career: ''
       },
+      BASE_API: 'http://localhost:8301',
       saveBtnDisabled: false, // 保存按钮是否禁用，防止表单重复提交
       rules: {
         name: [
@@ -118,6 +131,31 @@ export default {
       teacherApi.get(id).then(response => {
         this.teacher = response.data
       })
+    },
+    // 上传成功回调
+    handleAvatarSuccess(res, file) {
+      console.log('res', res, 'file', file)
+      if (res.code === 20000) {
+        this.teacher.avatar = res.data
+        // 强制重新渲染
+        this.$forceUpdate()
+      } else {
+        this.$message.error('上传失败')
+      }
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!')
+      }
+      return isJPG && isLt2M
+    },
+    handleAvatarError(err, file, fileList) {
+      this.$message.error('上传失败（http失败）')
     }
   }
 }
