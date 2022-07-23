@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import person.cls.lskt.model.vod.Subject;
 import person.cls.lskt.vo.vod.SubjectVo;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -17,4 +18,12 @@ import java.util.List;
 public interface SubjectService extends IService<Subject> {
 
     List<SubjectVo> getChildren(Integer id);
+
+    /**
+     * 导出
+     *
+     * @param response
+     */
+    void exportData(HttpServletResponse response);
+
 }

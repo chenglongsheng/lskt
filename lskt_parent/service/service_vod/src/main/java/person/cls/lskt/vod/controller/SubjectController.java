@@ -1,6 +1,7 @@
 package person.cls.lskt.vod.controller;
 
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import person.cls.lskt.utils.result.Result;
 import person.cls.lskt.vo.vod.SubjectVo;
 import person.cls.lskt.vod.service.SubjectService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -33,6 +35,11 @@ public class SubjectController {
     public Result<List<SubjectVo>> getChildren(@PathVariable Integer id) {
         List<SubjectVo> subjects = subjectService.getChildren(id);
         return Result.ok(subjects);
+    }
+
+    @GetMapping("exportData")
+    public void exportData(HttpServletResponse response) {
+        subjectService.exportData(response);
     }
 
 }

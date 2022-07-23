@@ -1,5 +1,12 @@
 <template>
   <div class="app-container">
+    <div class="el-toolbar">
+      <div class="el-toolbar-body" style="justify-content: flex-start;">
+        <el-button type="text" @click="exportData">
+          <i class="fa fa-plus" /> 导出
+        </el-button>
+      </div>
+    </div>
     <el-table
       :data="list"
       style="width: 100%"
@@ -35,6 +42,9 @@ export default {
       subjectAPI.getChildren(tree.id).then(response => {
         resolve(response.data)
       })
+    },
+    exportData(){
+      window.open('http://localhost:8301/vod/subject/exportData')
     }
   }
 }
