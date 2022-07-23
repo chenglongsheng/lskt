@@ -3,11 +3,9 @@ package person.cls.lskt.vod.controller;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import person.cls.lskt.model.vod.Subject;
 import person.cls.lskt.utils.result.Result;
 import person.cls.lskt.vo.vod.SubjectVo;
@@ -42,5 +40,9 @@ public class SubjectController {
         subjectService.exportData(response);
     }
 
+    @PostMapping("importData")
+    public void importData(MultipartFile file) {
+        subjectService.importDictData(file);
+    }
 }
 

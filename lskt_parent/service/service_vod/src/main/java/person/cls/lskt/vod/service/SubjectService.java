@@ -1,6 +1,7 @@
 package person.cls.lskt.vod.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.multipart.MultipartFile;
 import person.cls.lskt.model.vod.Subject;
 import person.cls.lskt.vo.vod.SubjectVo;
 
@@ -26,4 +27,5 @@ public interface SubjectService extends IService<Subject> {
      */
     void exportData(HttpServletResponse response);
 
+    void importDictData(MultipartFile file);
 }

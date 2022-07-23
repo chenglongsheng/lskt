@@ -3,9 +3,12 @@ package person.cls.lskt.vod.service.impl;
 import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
 import person.cls.lskt.model.vod.Subject;
 import person.cls.lskt.vo.vod.SubjectEeVo;
 import person.cls.lskt.vo.vod.SubjectVo;
+import person.cls.lskt.vod.listener.SubjectListener;
 import person.cls.lskt.vod.mapper.SubjectMapper;
 import person.cls.lskt.vod.service.SubjectService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -27,6 +30,9 @@ import java.util.List;
  */
 @Service
 public class SubjectServiceImpl extends ServiceImpl<SubjectMapper, Subject> implements SubjectService {
+
+    @Autowired
+    private SubjectListener subjectListener;
 
     @Override
     public List<SubjectVo> getChildren(Integer id) {
@@ -73,6 +79,15 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectMapper, Subject> impl
                 dictVoList.add(dictVo);
             }
             EasyExcel.write(response.getOutputStream(), SubjectEeVo.class).sheet("课程分类").doWrite(dictVoList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void importDictData(MultipartFile file) {
+        try {
+            EasyExcel.read(file.getInputStream(), SubjectEeVo.class, subjectListener).sheet().doRead();
         } catch (IOException e) {
             e.printStackTrace();
         }
