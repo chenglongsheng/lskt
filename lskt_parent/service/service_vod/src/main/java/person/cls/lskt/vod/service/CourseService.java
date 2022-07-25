@@ -1,7 +1,9 @@
 package person.cls.lskt.vod.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import person.cls.lskt.model.vod.Course;
+import person.cls.lskt.vo.vod.CourseQueryVo;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import person.cls.lskt.model.vod.Course;
  */
 public interface CourseService extends IService<Course> {
 
+    IPage<Course> pageCourse(Long current, Long limit, CourseQueryVo courseQueryVo);
 }
