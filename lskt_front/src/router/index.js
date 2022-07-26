@@ -93,7 +93,7 @@ export const constantRoutes = [
         name: 'CourseInfo',
         component: () => import('@/views/vod/course/form'),
         meta: { title: '发布课程' },
-        hidden: false
+        hidden: true
       },
       {
         path: 'course/info/:id',
@@ -112,7 +112,7 @@ export const constantRoutes = [
       {
         path: 'course/chart/:id',
         name: 'CourseChart',
-        component: () => import('@/views/vod/course/chart'),
+        component: () => import('@/views/vod/course/form'),
         meta: { title: '课程统计' },
         hidden: true
       }
