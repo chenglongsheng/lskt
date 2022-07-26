@@ -1,5 +1,7 @@
 package person.cls.lskt.vo.vod;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,6 +17,7 @@ import java.math.BigDecimal;
 public class CourseFormVo {
 
     @ApiModelProperty(value = "课程ID")
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty(value = "课程讲师ID")
