@@ -22,5 +22,11 @@ export default {
             method: `post`,
             data: courseInfo
         })
+    },
+    getCourseInfoById(id){
+        return request({
+            url: `${api_name}/get/${id}`,
+            method: `get`
+        })
     }
 }
