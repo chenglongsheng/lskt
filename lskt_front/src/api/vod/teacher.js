@@ -1,6 +1,12 @@
 import request from '@/utils/request'
 
 export default {
+    list() {
+        return request({
+            url: `/vod/teacher/list`,
+            method: `get`
+        })
+    },
     page(current, limit, searchObj) {
         return request({
             url: `/vod/teacher/page/${current}/${limit}`,
