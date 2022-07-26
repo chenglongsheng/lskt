@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import person.cls.lskt.model.vod.Course;
 import person.cls.lskt.utils.result.Result;
+import person.cls.lskt.vo.vod.CourseFormVo;
 import person.cls.lskt.vo.vod.CourseQueryVo;
 import person.cls.lskt.vod.service.CourseService;
 
@@ -36,6 +37,12 @@ public class CourseController {
     public Result<Course> remove(@PathVariable Long id) {
         courseService.removeById(id);
         return Result.ok(null);
+    }
+
+    @PostMapping("save")
+    public Result<Long> save(@RequestBody CourseFormVo courseFormVo) {
+        Long courseId = courseService.saveCourseInfo(courseFormVo);
+        return Result.ok(courseId);
     }
 
 }

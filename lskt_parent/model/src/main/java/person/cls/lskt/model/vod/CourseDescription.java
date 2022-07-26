@@ -50,4 +50,8 @@ public class CourseDescription {
     @TableField("description")
     private String description;
 
+    public CourseDescription(Long courseId, String description) {
+        this.courseId = courseId;
+        this.description = description;
+    }
 }

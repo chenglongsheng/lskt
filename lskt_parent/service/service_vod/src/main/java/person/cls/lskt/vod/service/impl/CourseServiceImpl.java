@@ -3,11 +3,14 @@ package person.cls.lskt.vod.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import person.cls.lskt.model.vod.Course;
+import person.cls.lskt.vo.vod.CourseFormVo;
 import person.cls.lskt.vo.vod.CourseQueryVo;
 import person.cls.lskt.vod.mapper.CourseMapper;
+import person.cls.lskt.vod.service.CourseDescriptionService;
 import person.cls.lskt.vod.service.CourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -35,6 +38,9 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Autowired
     private SubjectService subjectService;
 
+    @Autowired
+    private CourseDescriptionService courseDescriptionService;
+
     @Override
     public Map<String, Object> pageCourse(Long current, Long limit, CourseQueryVo courseQueryVo) {
         Page<Course> page = new Page<>(current, limit);
@@ -59,6 +65,16 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         map.put("totalCount", iPage.getTotal());
 
         return map;
+    }
+
+    @Override
+    public Long saveCourseInfo(CourseFormVo courseFormVo) {
+        Course course = new Course();
+        BeanUtils.copyProperties(courseFormVo, course);
+        super.save(course);
+        String description = courseFormVo.getDescription();
+        courseDescriptionService.saveCourseInfo(course.getId(), description);
+        return course.getId();
     }
 
     private void getSubjectAndTeacherName(Course course) {

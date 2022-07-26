@@ -17,4 +17,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class CourseDescriptionServiceImpl extends ServiceImpl<CourseDescriptionMapper, CourseDescription> implements CourseDescriptionService {
 
+    @Override
+    public void saveCourseInfo(Long courseId, String description) {
+        CourseDescription courseDescription = new CourseDescription(courseId, description);
+        super.save(courseDescription);
+    }
 }

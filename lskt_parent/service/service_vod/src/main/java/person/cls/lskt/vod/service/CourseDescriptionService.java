@@ -13,4 +13,5 @@ import person.cls.lskt.model.vod.CourseDescription;
  */
 public interface CourseDescriptionService extends IService<CourseDescription> {
 
+    void saveCourseInfo(Long courseId, String description);
 }
