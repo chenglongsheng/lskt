@@ -2,9 +2,12 @@ package person.cls.lskt.model.vod;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import person.cls.lskt.model.base.BaseEntity;
 
 import java.math.BigDecimal;
@@ -35,6 +38,8 @@ public class Course extends BaseEntity {
 
     @ApiModelProperty(value = "课程销售价格，设置为0则可免费观看")
     @TableField("price")
+    // 把BigDecimal的序列化值改成字符串类型即可。
+    @JsonSerialize(using = ToStringSerializer.class)
     private BigDecimal price;
 
     @ApiModelProperty(value = "总课时")
