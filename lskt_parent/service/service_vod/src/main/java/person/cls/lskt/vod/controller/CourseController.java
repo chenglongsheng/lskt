@@ -1,6 +1,7 @@
 package person.cls.lskt.vod.controller;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +44,12 @@ public class CourseController {
     public Result<Long> save(@RequestBody CourseFormVo courseFormVo) {
         Long courseId = courseService.saveCourseInfo(courseFormVo);
         return Result.ok(courseId);
+    }
+
+    @GetMapping("get/{id}")
+    public Result<CourseFormVo> get(@PathVariable Long id) {
+        CourseFormVo courseInfo = courseService.getCourseInfoById(id);
+        return Result.ok(courseInfo);
     }
 
 }

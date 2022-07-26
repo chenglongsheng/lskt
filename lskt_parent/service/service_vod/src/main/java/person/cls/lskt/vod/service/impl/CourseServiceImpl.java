@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import person.cls.lskt.model.vod.Course;
+import person.cls.lskt.model.vod.CourseDescription;
 import person.cls.lskt.vo.vod.CourseFormVo;
 import person.cls.lskt.vo.vod.CourseQueryVo;
 import person.cls.lskt.vod.mapper.CourseMapper;
@@ -75,6 +76,18 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         String description = courseFormVo.getDescription();
         courseDescriptionService.saveCourseInfo(course.getId(), description);
         return course.getId();
+    }
+
+    @Override
+    public CourseFormVo getCourseInfoById(Long id) {
+        Course course = super.getById(id);
+        CourseFormVo courseInfo = new CourseFormVo();
+        BeanUtils.copyProperties(course, courseInfo);
+
+        CourseDescription courseDescription = courseDescriptionService.getDescriptionByCourseId(course.getId());
+        courseInfo.setDescription(courseDescription.getDescription());
+
+        return courseInfo;
     }
 
     private void getSubjectAndTeacherName(Course course) {

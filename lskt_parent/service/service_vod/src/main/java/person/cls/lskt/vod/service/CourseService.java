@@ -21,4 +21,5 @@ public interface CourseService extends IService<Course> {
 
     Long saveCourseInfo(CourseFormVo courseFormVo);
 
+    CourseFormVo getCourseInfoById(Long id);
 }

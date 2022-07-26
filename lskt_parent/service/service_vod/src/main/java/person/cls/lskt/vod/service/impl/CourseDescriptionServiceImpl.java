@@ -1,5 +1,6 @@
 package person.cls.lskt.vod.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import person.cls.lskt.model.vod.CourseDescription;
 import person.cls.lskt.vod.mapper.CourseDescriptionMapper;
 import person.cls.lskt.vod.service.CourseDescriptionService;
@@ -21,5 +22,10 @@ public class CourseDescriptionServiceImpl extends ServiceImpl<CourseDescriptionM
     public void saveCourseInfo(Long courseId, String description) {
         CourseDescription courseDescription = new CourseDescription(courseId, description);
         super.save(courseDescription);
+    }
+
+    @Override
+    public CourseDescription getDescriptionByCourseId(Long id) {
+        return super.getOne(Wrappers.lambdaQuery(CourseDescription.class).eq(CourseDescription::getCourseId, id));
     }
 }
