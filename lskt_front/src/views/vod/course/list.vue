@@ -55,7 +55,7 @@
     <el-card class="operate-container" shadow="never">
       <i class="el-icon-tickets" style="margin-top: 5px"></i>
       <span style="margin-top: 5px">数据列表</span>
-      <el-button class="btn-add" @click="add()">添加</el-button>
+      <el-button class="btn-add" @click="add()" style="margin-left: 10px;">添加</el-button>
     </el-card>
 
     <!-- 表格 -->
@@ -177,7 +177,6 @@ export default {
         .getPageList(this.page, this.limit, this.searchObj)
         .then(response => {
           this.list = response.data.records
-          console.log(this.list)
           this.total = response.data.totalCount
         })
     },
@@ -222,7 +221,30 @@ export default {
       this.searchObj = {}
       this.subjectLevelTwoList = [] // 二级分类列表
       this.fetchData()
-    }
+    },
+
+    removeById(id) {
+      this.$confirm('此操作将删除该课程, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+        .then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+          courseApi.removeById(id).then(response => {
+            this.fetchData()
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
+    },
   }
 }
 </script>

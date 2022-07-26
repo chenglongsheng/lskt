@@ -10,4 +10,10 @@ export default {
             data: searchObj
         })
     },
+    removeById(id) {
+        return request({
+            url: `${api_name}/remove/${id}`,
+            method: `delete`
+        })
+    }
 }
