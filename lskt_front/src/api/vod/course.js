@@ -15,5 +15,12 @@ export default {
             url: `${api_name}/remove/${id}`,
             method: `delete`
         })
+    },
+    saveCourseInfo(courseInfo) {
+        return request({
+            url: `${api_name}/save`,
+            method: `post`,
+            data: courseInfo
+        })
     }
 }
