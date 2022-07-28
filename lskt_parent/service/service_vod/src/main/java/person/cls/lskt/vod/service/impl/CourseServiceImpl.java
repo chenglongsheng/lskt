@@ -90,6 +90,14 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         return courseInfo;
     }
 
+    @Override
+    public void updateCourseInfo(CourseFormVo courseFormVo) {
+        Course course = new Course();
+        BeanUtils.copyProperties(courseFormVo, course);
+        super.updateById(course);
+        courseDescriptionService.updateCourseInfo(courseFormVo.getId(), courseFormVo.getDescription());
+    }
+
     private void getSubjectAndTeacherName(Course course) {
         course.getParam().put("teacherName", teacherService.getById(course.getTeacherId()).getName());
         course.getParam().put("subjectTitle", subjectService.getById(course.getSubjectId()).getTitle());

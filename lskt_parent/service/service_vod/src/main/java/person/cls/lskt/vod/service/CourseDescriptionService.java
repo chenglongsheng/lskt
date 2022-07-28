@@ -16,4 +16,6 @@ public interface CourseDescriptionService extends IService<CourseDescription> {
     void saveCourseInfo(Long courseId, String description);
 
     CourseDescription getDescriptionByCourseId(Long id);
+
+    void updateCourseInfo(Long id, String description);
 }

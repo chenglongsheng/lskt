@@ -28,4 +28,12 @@ public class CourseDescriptionServiceImpl extends ServiceImpl<CourseDescriptionM
     public CourseDescription getDescriptionByCourseId(Long id) {
         return super.getOne(Wrappers.lambdaQuery(CourseDescription.class).eq(CourseDescription::getCourseId, id));
     }
+
+    @Override
+    public void updateCourseInfo(Long id, String description) {
+        super.update(new CourseDescription(id, description), Wrappers.lambdaQuery(CourseDescription.class)
+                .eq(id != null, CourseDescription::getCourseId, id)
+        );
+
+    }
 }
