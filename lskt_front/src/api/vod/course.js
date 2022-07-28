@@ -28,5 +28,12 @@ export default {
             url: `${api_name}/get/${id}`,
             method: `get`
         })
+    },
+    updateCourseInfoById(courseInfo){
+        return request({
+            url: `${api_name}/update`,
+            method: `post`,
+            data: courseInfo
+        })
     }
 }
