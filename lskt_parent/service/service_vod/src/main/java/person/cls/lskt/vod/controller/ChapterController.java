@@ -1,12 +1,11 @@
 package person.cls.lskt.vod.controller;
 
 
+import jdk.nashorn.internal.ir.ReturnNode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import person.cls.lskt.model.vod.Chapter;
 import person.cls.lskt.utils.result.Result;
 import person.cls.lskt.vo.vod.ChapterVo;
 import person.cls.lskt.vod.service.ChapterService;
@@ -33,5 +32,30 @@ public class ChapterController {
         List<ChapterVo> result = chapterService.getNestedTreeList(id);
         return Result.ok(result);
     }
+
+    @DeleteMapping("remove/{id}")
+    public Result<Chapter> remove(@PathVariable Long id) {
+        chapterService.removeChapterById(id);
+        return Result.ok(null);
+    }
+
+    @PostMapping("save")
+    public Result<Chapter> save(@RequestBody Chapter chapter) {
+        chapterService.save(chapter);
+        return Result.ok(null);
+    }
+
+    @GetMapping("get/{id}")
+    public Result<Chapter> get(@PathVariable Long id) {
+        Chapter chapter = chapterService.getById(id);
+        return Result.ok(chapter);
+    }
+
+    @PutMapping("update")
+    public Result<Chapter> update(@RequestBody Chapter chapter) {
+        chapterService.updateById(chapter);
+        return Result.ok(null);
+    }
+
 }
 
