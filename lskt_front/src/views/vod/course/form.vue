@@ -18,8 +18,8 @@
 <script>
 // 引入子组件
 import Info from '@/views/vod/course/components/info'
-import Chapter from '@/views/vod/course/components/chapter'
-import Publish from '@/views/vod/course/components/publish'
+import Chapter from '@/views/vod/course/components/Chapter'
+import Publish from '@/views/vod/course/components/Publish'
 
 export default {
   components: { Info, Chapter, Publish }, // 注册子组件
