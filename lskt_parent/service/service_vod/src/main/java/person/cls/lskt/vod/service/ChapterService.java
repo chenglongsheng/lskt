@@ -2,6 +2,9 @@ package person.cls.lskt.vod.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import person.cls.lskt.model.vod.Chapter;
+import person.cls.lskt.vo.vod.ChapterVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import person.cls.lskt.model.vod.Chapter;
  */
 public interface ChapterService extends IService<Chapter> {
 
+    List<ChapterVo> getNestedTreeList(Long id);
 }
