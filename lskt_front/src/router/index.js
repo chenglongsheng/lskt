@@ -54,13 +54,13 @@ export const constantRoutes = [
       meta: { title: '龙生课堂后台管理系统', icon: 'dashboard' }
     }]
   },
-  // 点播管理
+  // 讲师管理
   {
     path: '/vod',
     component: Layout,
     redirect: '/vod/teacher/list',
     name: 'Vod',
-    meta: { title: '点播服务管理', icon: 'el-icon-bank-card' },
+    meta: { title: '讲师管理', icon: 'el-icon-bank-card' },
     alwaysShow: true,
     children: [
       {
@@ -74,14 +74,21 @@ export const constantRoutes = [
         name: 'TeacherAdd',
         component: () => import('@/views/vod/teacher/form'),
         meta: { title: '添加讲师' },
-      },
-      {
-        path: 'teacher/edit/:id',
-        name: 'TeacherEdit',
-        component: () => import('@/views/vod/teacher/form'),
-        meta: { title: '编辑讲师' },
-        hidden: true
-      },
+      }
+    ]
+  },
+  // 课程管理
+  {
+    path: '/vodcourse',
+    component: Layout,
+    redirect: '/vodcourse/course/list',
+    name: 'VodCourse',
+    meta: {
+      title: '点播管理',
+      icon: 'el-icon-bank-card'
+    },
+    alwaysShow: true,
+    children: [
       {
         path: 'course/list',
         name: 'CourseList',
@@ -112,7 +119,7 @@ export const constantRoutes = [
       {
         path: 'course/chart/:id',
         name: 'CourseChart',
-        component: () => import('@/views/vod/course/form'),
+        component: () => import('@/views/vod/course/chart'),
         meta: { title: '课程统计' },
         hidden: true
       }
