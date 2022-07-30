@@ -53,6 +53,12 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
         videoService.remove(Wrappers.lambdaQuery(Video.class).eq(Video::getChapterId, id));
     }
 
+    @Override
+    public void removeChapterByCourseId(Long id) {
+        super.remove(Wrappers.lambdaQuery(Chapter.class)
+                .eq(id != null, Chapter::getCourseId, id));
+    }
+
     public List<VideoVo> getNestedVideoList(Long courseId, Long chapterId) {
         List<VideoVo> result = new ArrayList<>();
 

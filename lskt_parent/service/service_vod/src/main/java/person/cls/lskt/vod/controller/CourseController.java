@@ -36,7 +36,7 @@ public class CourseController {
 
     @DeleteMapping("remove/{id}")
     public Result<Course> remove(@PathVariable Long id) {
-        courseService.removeById(id);
+        courseService.removeCourseById(id);
         return Result.ok(null);
     }
 

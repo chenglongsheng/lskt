@@ -36,4 +36,10 @@ public class CourseDescriptionServiceImpl extends ServiceImpl<CourseDescriptionM
         );
 
     }
+
+    @Override
+    public void removeDescriptionById(Long id) {
+        super.remove(Wrappers.lambdaQuery(CourseDescription.class)
+                .eq(id != null, CourseDescription::getCourseId, id));
+    }
 }

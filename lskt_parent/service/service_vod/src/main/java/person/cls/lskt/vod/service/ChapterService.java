@@ -19,4 +19,6 @@ public interface ChapterService extends IService<Chapter> {
     List<ChapterVo> getNestedTreeList(Long id);
 
     void removeChapterById(Long id);
+
+    void removeChapterByCourseId(Long id);
 }

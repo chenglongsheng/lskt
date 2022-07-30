@@ -15,12 +15,9 @@ import person.cls.lskt.vo.vod.CourseFormVo;
 import person.cls.lskt.vo.vod.CoursePublishVo;
 import person.cls.lskt.vo.vod.CourseQueryVo;
 import person.cls.lskt.vod.mapper.CourseMapper;
-import person.cls.lskt.vod.service.CourseDescriptionService;
-import person.cls.lskt.vod.service.CourseService;
+import person.cls.lskt.vod.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-import person.cls.lskt.vod.service.SubjectService;
-import person.cls.lskt.vod.service.TeacherService;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -46,6 +43,12 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
     @Autowired
     private CourseDescriptionService courseDescriptionService;
+
+    @Autowired
+    private VideoService videoService;
+
+    @Autowired
+    private ChapterService chapterService;
 
     @Override
     public Map<String, Object> pageCourse(Long current, Long limit, CourseQueryVo courseQueryVo) {
@@ -118,6 +121,18 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         course.setStatus(1);
         course.setPublishTime(new Date());
         super.updateById(course);
+    }
+
+    @Override
+    public void removeCourseById(Long id) {
+        //根据课程id删除小节
+        videoService.removeVideoByCourseId(id);
+        //根据课程id删除章节
+        chapterService.removeChapterByCourseId(id);
+        //根据课程id删除描述
+        courseDescriptionService.removeDescriptionById(id);
+        //根据课程id删除课程
+        super.removeById(id);
     }
 
     //获取讲师和分类名称
