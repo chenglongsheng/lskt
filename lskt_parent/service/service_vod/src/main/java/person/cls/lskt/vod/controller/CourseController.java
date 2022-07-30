@@ -53,9 +53,9 @@ public class CourseController {
     }
 
     @PostMapping("update")
-    public Result<Course> update(@RequestBody CourseFormVo courseFormVo) {
-        courseService.updateCourseInfo(courseFormVo);
-        return Result.ok(null);
+    public Result<Long> update(@RequestBody CourseFormVo courseFormVo) {
+        Course course = courseService.updateCourseInfo(courseFormVo);
+        return Result.ok(course.getId());
     }
 
 }

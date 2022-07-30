@@ -10,6 +10,7 @@ import person.cls.lskt.model.vod.Course;
 import person.cls.lskt.model.vod.CourseDescription;
 import person.cls.lskt.model.vod.Subject;
 import person.cls.lskt.model.vod.Teacher;
+import person.cls.lskt.utils.result.Result;
 import person.cls.lskt.vo.vod.CourseFormVo;
 import person.cls.lskt.vo.vod.CourseQueryVo;
 import person.cls.lskt.vod.mapper.CourseMapper;
@@ -95,11 +96,12 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     }
 
     @Override
-    public void updateCourseInfo(CourseFormVo courseFormVo) {
+    public Course updateCourseInfo(CourseFormVo courseFormVo) {
         Course course = new Course();
         BeanUtils.copyProperties(courseFormVo, course);
         super.updateById(course);
         courseDescriptionService.updateCourseInfo(courseFormVo.getId(), courseFormVo.getDescription());
+        return course;
     }
 
     //获取讲师和分类名称
