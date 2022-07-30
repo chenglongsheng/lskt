@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import person.cls.lskt.model.vod.Course;
 import person.cls.lskt.model.vod.CourseDescription;
+import person.cls.lskt.model.vod.Subject;
+import person.cls.lskt.model.vod.Teacher;
 import person.cls.lskt.vo.vod.CourseFormVo;
 import person.cls.lskt.vo.vod.CourseQueryVo;
 import person.cls.lskt.vod.mapper.CourseMapper;
@@ -60,9 +62,11 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
                         .eq(subjectParentId != null, Course::getSubjectParentId, subjectParentId));
 
         List<Course> records = iPage.getRecords();
-        records.forEach(this::getSubjectAndTeacherName);
+        records.forEach(this::getTeacherOrSubjectName);
+        long totalPage = iPage.getPages();//总页数
 
         map.put("records", records);
+        map.put("totalPage", totalPage);
         map.put("totalCount", iPage.getTotal());
 
         return map;
@@ -98,10 +102,22 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         courseDescriptionService.updateCourseInfo(courseFormVo.getId(), courseFormVo.getDescription());
     }
 
-    private void getSubjectAndTeacherName(Course course) {
-        course.getParam().put("teacherName", teacherService.getById(course.getTeacherId()).getName());
-        course.getParam().put("subjectTitle", subjectService.getById(course.getSubjectId()).getTitle());
-        course.getParam().put("subjectParentTitle", subjectService.getById(course.getSubjectParentId()).getTitle());
+    //获取讲师和分类名称
+    private void getTeacherOrSubjectName(Course course) {
+        //查询讲师名称
+        Teacher teacher = teacherService.getById(course.getTeacherId());
+        if (teacher != null) {
+            course.getParam().put("teacherName", teacher.getName());
+        }
+        //查询分类名称
+        Subject subjectOne = subjectService.getById(course.getSubjectParentId());
+        if (subjectOne != null) {
+            course.getParam().put("subjectParentTitle", subjectOne.getTitle());
+        }
+        Subject subjectTwo = subjectService.getById(course.getSubjectId());
+        if (subjectTwo != null) {
+            course.getParam().put("subjectTitle", subjectTwo.getTitle());
+        }
     }
 
 }
