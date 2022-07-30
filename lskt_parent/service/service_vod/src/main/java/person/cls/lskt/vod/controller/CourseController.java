@@ -1,7 +1,6 @@
 package person.cls.lskt.vod.controller;
 
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,7 +65,8 @@ public class CourseController {
     }
 
     @PutMapping("publishCourseById/{id}")
-    public Result<Course> publishCourseById(@PathVariable Long id) {
+    public Result<CoursePublishVo> publishCourseById(@PathVariable Long id) {
+        courseService.publishCourseById(id);
         return Result.ok(null);
     }
 

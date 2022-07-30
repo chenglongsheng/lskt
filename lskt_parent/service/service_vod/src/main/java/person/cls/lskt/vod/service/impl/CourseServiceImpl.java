@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import person.cls.lskt.vod.service.SubjectService;
 import person.cls.lskt.vod.service.TeacherService;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,6 +109,15 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Override
     public CoursePublishVo getCoursePublishById(Long id) {
         return baseMapper.selectCoursePublishVo(id);
+    }
+
+    @Override
+    public void publishCourseById(Long id) {
+        Course course = new Course();
+        course.setId(id);
+        course.setStatus(1);
+        course.setPublishTime(new Date());
+        super.updateById(course);
     }
 
     //获取讲师和分类名称
