@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import person.cls.lskt.model.vod.Course;
 import person.cls.lskt.utils.result.Result;
 import person.cls.lskt.vo.vod.CourseFormVo;
+import person.cls.lskt.vo.vod.CoursePublishVo;
 import person.cls.lskt.vo.vod.CourseQueryVo;
 import person.cls.lskt.vod.service.CourseService;
 
@@ -56,6 +57,17 @@ public class CourseController {
     public Result<Long> update(@RequestBody CourseFormVo courseFormVo) {
         Course course = courseService.updateCourseInfo(courseFormVo);
         return Result.ok(course.getId());
+    }
+
+    @GetMapping("getCoursePublishVo/{id}")
+    public Result<CoursePublishVo> getCoursePublishById(@PathVariable Long id) {
+        CoursePublishVo coursePublishVo = courseService.getCoursePublishById(id);
+        return Result.ok(coursePublishVo);
+    }
+
+    @PutMapping("publishCourseById/{id}")
+    public Result<Course> publishCourseById(@PathVariable Long id) {
+        return Result.ok(null);
     }
 
 }

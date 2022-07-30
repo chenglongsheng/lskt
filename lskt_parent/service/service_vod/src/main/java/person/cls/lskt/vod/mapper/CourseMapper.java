@@ -1,7 +1,9 @@
 package person.cls.lskt.vod.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import person.cls.lskt.model.vod.Course;
+import person.cls.lskt.vo.vod.CoursePublishVo;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import person.cls.lskt.model.vod.Course;
  */
 public interface CourseMapper extends BaseMapper<Course> {
 
+    CoursePublishVo selectCoursePublishVo(Long id);
 }

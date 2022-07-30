@@ -12,6 +12,7 @@ import person.cls.lskt.model.vod.Subject;
 import person.cls.lskt.model.vod.Teacher;
 import person.cls.lskt.utils.result.Result;
 import person.cls.lskt.vo.vod.CourseFormVo;
+import person.cls.lskt.vo.vod.CoursePublishVo;
 import person.cls.lskt.vo.vod.CourseQueryVo;
 import person.cls.lskt.vod.mapper.CourseMapper;
 import person.cls.lskt.vod.service.CourseDescriptionService;
@@ -102,6 +103,11 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         super.updateById(course);
         courseDescriptionService.updateCourseInfo(courseFormVo.getId(), courseFormVo.getDescription());
         return course;
+    }
+
+    @Override
+    public CoursePublishVo getCoursePublishById(Long id) {
+        return baseMapper.selectCoursePublishVo(id);
     }
 
     //获取讲师和分类名称

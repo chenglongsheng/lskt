@@ -3,6 +3,7 @@ package person.cls.lskt.vod.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import person.cls.lskt.model.vod.Course;
 import person.cls.lskt.vo.vod.CourseFormVo;
+import person.cls.lskt.vo.vod.CoursePublishVo;
 import person.cls.lskt.vo.vod.CourseQueryVo;
 
 import java.util.Map;
@@ -24,4 +25,6 @@ public interface CourseService extends IService<Course> {
     CourseFormVo getCourseInfoById(Long id);
 
     Course updateCourseInfo(CourseFormVo courseFormVo);
+
+    CoursePublishVo getCoursePublishById(Long id);
 }
