@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController()
-@RequestMapping("/admin/user")
+@RequestMapping("/vod/user")
 public class LoginController {
 
     @PostMapping("login")
