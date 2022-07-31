@@ -7,6 +7,7 @@
         <module>model</module>
         <module>service</module>
         <module>common</module>
+        <module>service_gateway</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -99,18 +100,18 @@
                 <artifactId>easyexcel</artifactId>
                 <version>${easyexcel.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>aliyun-java-sdk-core</artifactId>
-                <version>${aliyun.version}</version>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>com.aliyun</groupId>-->
+            <!--                <artifactId>aliyun-java-sdk-core</artifactId>-->
+            <!--                <version>${aliyun.version}</version>-->
+            <!--            </dependency>-->
 
             <!--aliyunOSS-->
-            <dependency>
-                <groupId>com.aliyun.oss</groupId>
-                <artifactId>aliyun-sdk-oss</artifactId>
-                <version>${aliyun.oss.version}</version>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>com.aliyun.oss</groupId>-->
+            <!--                <artifactId>aliyun-sdk-oss</artifactId>-->
+            <!--                <version>${aliyun.oss.version}</version>-->
+            <!--            </dependency>-->
 
             <!--日期时间工具-->
             <dependency>
@@ -119,11 +120,11 @@
                 <version>${jodatime.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.xuxueli</groupId>
-                <artifactId>xxl-job-core</artifactId>
-                <version>${xxl-job.version}</version>
-            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>com.xuxueli</groupId>-->
+            <!--                <artifactId>xxl-job-core</artifactId>-->
+            <!--                <version>${xxl-job.version}</version>-->
+            <!--            </dependency>-->
             <!--swagger-->
             <dependency>
                 <groupId>io.springfox</groupId>
