@@ -2,6 +2,9 @@ package person.cls.lskt.wechat.service;
 
 import person.cls.lskt.model.wechat.Menu;
 import com.baomidou.mybatisplus.extension.service.IService;
+import person.cls.lskt.vo.wechat.MenuVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface MenuService extends IService<Menu> {
 
+    List<MenuVo> findMenuInfo();
+
+    List<Menu> findMenuOneInfo();
 }
