@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import person.cls.lskt.model.user.UserInfo;
 
-@FeignClient
+// @FeignClient("service-user")必须加上提供者的服务名
+@FeignClient("service-user")
 public interface UserInfoFeignClient {
 
     @GetMapping("/user/userInfo/inner/getById/{id}")
