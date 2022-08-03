@@ -1,7 +1,12 @@
 package person.cls.lskt.activity.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import person.cls.lskt.model.activity.CouponInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import person.cls.lskt.model.activity.CouponUse;
+import person.cls.lskt.vo.activity.CouponUseQueryVo;
 
 /**
  * <p>
@@ -13,4 +18,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CouponInfoService extends IService<CouponInfo> {
 
+    IPage<CouponUse> selectCouponUsePage(Page<CouponUse> pageParam, CouponUseQueryVo couponUseQueryVo);
 }

@@ -2,12 +2,15 @@ package person.cls.lskt.activity.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import person.cls.lskt.activity.service.CouponInfoService;
 import person.cls.lskt.model.activity.CouponInfo;
+import person.cls.lskt.model.activity.CouponUse;
 import person.cls.lskt.utils.result.Result;
+import person.cls.lskt.vo.activity.CouponUseQueryVo;
 
 import java.util.List;
 
@@ -54,6 +57,13 @@ public class CouponInfoController {
     public Result<CouponInfo> batchRemove(@RequestBody List<String> idList) {
         service.removeByIds(idList);
         return Result.ok(null);
+    }
+
+    @GetMapping("couponUse/{page}/{limit}")
+    public Result<IPage<CouponUse>> index(@PathVariable Long page, @PathVariable Long limit, @RequestParam(required = false) CouponUseQueryVo couponUseQueryVo) {
+        Page<CouponUse> pageParam = new Page<>(page, limit);
+        IPage<CouponUse> pageModel = service.selectCouponUsePage(pageParam, couponUseQueryVo);
+        return Result.ok(pageModel);
     }
 
 }
