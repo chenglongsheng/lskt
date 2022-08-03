@@ -39,22 +39,10 @@ public class CouponInfoServiceImpl extends ServiceImpl<CouponInfoMapper, CouponI
     public IPage<CouponUse> selectCouponUsePage(Page<CouponUse> pageParam, CouponUseQueryVo couponUseQueryVo) {
         //获取条件
         Long couponId = couponUseQueryVo.getCouponId();
-        String couponStatus = couponUseQueryVo.getCouponStatus();
-        String getTimeBegin = couponUseQueryVo.getGetTimeBegin();
-        String getTimeEnd = couponUseQueryVo.getGetTimeEnd();
         //封装条件
         QueryWrapper<CouponUse> wrapper = new QueryWrapper<>();
         if (!StringUtils.isEmpty(couponId)) {
             wrapper.eq("coupon_id", couponId);
-        }
-        if (!StringUtils.isEmpty(couponStatus)) {
-            wrapper.eq("coupon_status", couponStatus);
-        }
-        if (!StringUtils.isEmpty(getTimeBegin)) {
-            wrapper.ge("get_time", getTimeBegin);
-        }
-        if (!StringUtils.isEmpty(getTimeEnd)) {
-            wrapper.le("get_time", getTimeEnd);
         }
         //调用方法查询
         IPage<CouponUse> page = couponUseService.page(pageParam, wrapper);

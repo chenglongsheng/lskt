@@ -2,7 +2,6 @@ package person.cls.lskt.activity.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,7 +59,7 @@ public class CouponInfoController {
     }
 
     @GetMapping("couponUse/{page}/{limit}")
-    public Result<IPage<CouponUse>> index(@PathVariable Long page, @PathVariable Long limit, @RequestParam(required = false) CouponUseQueryVo couponUseQueryVo) {
+    public Result<IPage<CouponUse>> index(@PathVariable Long page, @PathVariable Long limit, CouponUseQueryVo couponUseQueryVo) {
         Page<CouponUse> pageParam = new Page<>(page, limit);
         IPage<CouponUse> pageModel = service.selectCouponUsePage(pageParam, couponUseQueryVo);
         return Result.ok(pageModel);
