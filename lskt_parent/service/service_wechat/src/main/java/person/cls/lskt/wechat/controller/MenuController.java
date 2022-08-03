@@ -1,6 +1,7 @@
 package person.cls.lskt.wechat.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,12 @@ public class MenuController {
 
     @Autowired
     private MenuService menuService;
+
+    @GetMapping("syncMenu")
+    public Result createMenu() throws WxErrorException {
+        menuService.syncMenu();
+        return Result.ok(null);
+    }
 
     @GetMapping("getAccessToken")
     public Result<String> getAccessToken() {
@@ -95,6 +102,12 @@ public class MenuController {
     @DeleteMapping("batchRemove")
     public Result<Menu> batchRemove(@RequestBody List<Long> idList) {
         menuService.removeByIds(idList);
+        return Result.ok(null);
+    }
+
+    @DeleteMapping("removeMenu")
+    public Result removeMenu() {
+        menuService.removeMenu();
         return Result.ok(null);
     }
 
